@@ -1,30 +1,19 @@
+import React from 'react';
+
 const Header = (props) => {
   return (
     <header>
       <h1>{ props.title }</h1>
-      <span className="stats">Players: { props.totalPlayers }</span>
+      <span className="stats">Players: {props.totalPlayers}</span> 
     </header>
   );
 }
 
-const Player = (props) => {
-  return (
-    <div className="player">
-      <span className="player-name">
-        <button className="remove-player" onClick={() => props.removePlayer(props.id)}>✖</button>
-        { props.name }
-      </span>
-
-      <Counter />
-    </div>
-  );
-}
-
 class Counter extends React.Component {
-  state = {
-    score: 0
+  state = { 
+    score: 0 
   };
-
+  
   incrementScore = () => {
     this.setState( prevState => ({
       score: prevState.score + 1
@@ -46,6 +35,19 @@ class Counter extends React.Component {
       </div>
     );
   }
+}
+  
+const Player = (props) => {
+  return (
+    <div className="player">
+      <span className="player-name">
+        <button className="remove-player" onClick={() => props.removePlayer(props.id)}>✖</button>
+        { props.name }
+      </span>
+
+      <Counter />
+    </div>
+  );
 }
 
 class App extends React.Component {
@@ -73,7 +75,7 @@ class App extends React.Component {
   handleRemovePlayer = (id) => {
     this.setState( prevState => {
       return {
-        players: prevState.players.filter( p => p.id !== id )
+        players: prevState.players.filter(p => p.id !== id)
       };
     });
   }
@@ -100,7 +102,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+export default App;
