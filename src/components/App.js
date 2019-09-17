@@ -28,11 +28,23 @@ class App extends Component {
     ]
   };
 
-  handleScoreChange = (delta) => {
-    // this.setState( prevState => ({
-    //   score: prevState.score + 1
-    // }));
-    console.log(delta);
+  handleScoreChange = (index, delta) => {
+    this.setState( prevState => {
+      // New 'players' array – a copy of the previous `players` state
+      const updatedPlayers = [ ...prevState.players ];
+      // A copy of the player object we're targeting
+      const updatedPlayer = { ...updatedPlayers[index] };
+
+      // Update the target player's score
+      updatedPlayer.score += delta;
+      // Update the 'players' array with the target player's latest score
+      updatedPlayers[index] = updatedPlayer;
+
+      // Update the `players` state without mutating the original state
+      return {
+        players: updatedPlayers
+      };
+    });
   }
 
   handleRemovePlayer = (id) => {
